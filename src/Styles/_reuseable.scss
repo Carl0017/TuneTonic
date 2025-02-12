@@ -1,0 +1,27 @@
+@mixin flex($direction, $gap, $justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+    flex-flow: $direction;
+    gap: $gap;
+}
+
+@mixin defbutton($background,  $color, $padding, $radius){
+    background: $background;
+    color: $color;
+    border: none;
+    @include flex(row, 0.5rem, center);
+    padding: $padding;
+    border-radius: $radius;
+}
+
+@mixin customButton($background,$color, $padding, $border){
+    background: $background;
+    color: $color;
+    border: none;
+    @include flex(row, 0.5rem, center);
+    padding: $padding;
+    border:$border;
+    border-radius: 10rem;
+}
+
