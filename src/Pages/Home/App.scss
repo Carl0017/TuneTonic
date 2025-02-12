@@ -74,3 +74,51 @@ body{
     }
   }
 }
+
+
+@media screen and (max-width: 768px){
+
+  .card{
+    background-size: cover;
+    background-color: $dark;
+    padding: 1.6rem;
+    border-radius: 1rem;
+    height: 1rem;
+    width: 1rem;
+    transition: .3s ease-in-out;
+  
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+
+  .mainWrapper{
+    padding: 1rem;
+    height: max-content;
+    align-items: start;
+    .getStartedWrapper{
+      @include flex(column, .5rem, center);
+      align-items: center;
+      width: 100%;
+      text-align: center;
+
+      h2{
+        display: block;
+        width: 100%;
+        font-size: 1.6rem;
+        margin: 0;
+        padding: 0;
+
+        svg{
+          margin-right: .3rem;
+        }
+      }
+
+      p{
+        width: 90%;
+        font-size: .9rem;
+        text-align: center;
+      }
+    }
+  }
+}
