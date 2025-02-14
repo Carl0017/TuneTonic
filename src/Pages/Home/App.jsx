@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Navbar from "../../Components/Navbar/App"
 
 import './App.scss'
 import { Music } from 'lucide-react'
@@ -31,46 +32,51 @@ function App() {
 
   return (
     <>
-      <div className="mainWrapper">
-        <div className="artistImageWrapper">
-           <div className="rowOne">
-            <ArtistCard imageUrl={artist1}/>
-            <ArtistCard imageUrl={artist2}/>
-            <ArtistCard imageUrl={artist3}/>
-            <ArtistCard imageUrl={artist4}/>
-           </div>
-           <div className="rowOne">
-            <ArtistCard imageUrl={artist5}/>
-            <ArtistCard imageUrl={artist6}/>
-            <ArtistCard imageUrl={artist8}/>
-            <ArtistCard imageUrl={artist9}/>
-           </div>
-           <div className="rowOne">
-            <ArtistCard imageUrl={artist10}/>
-            <ArtistCard imageUrl={artist11}/>
-            <ArtistCard imageUrl={artist12}/>
-           </div>
-           <div className="rowOne">
-            <ArtistCard imageUrl={artist13}/>
-            <ArtistCard imageUrl={artist14}/>
-           </div>
-        </div>
+      <div className="mainCon">
+      <Navbar />
 
-        <div className="getStartedWrapper">
-          
-          <h2> 
-            <Music /> 
-            Your Playlist, Your Music, Anytime.
-          </h2>
+<div className="mainWrapper">
+  
+  <div className="artistImageWrapper">
+     <div className="rowOne">
+      <ArtistCard imageUrl={artist1}/>
+      <ArtistCard imageUrl={artist2}/>
+      <ArtistCard imageUrl={artist3}/>
+      <ArtistCard imageUrl={artist4}/>
+     </div>
+     <div className="rowOne">
+      <ArtistCard imageUrl={artist5}/>
+      <ArtistCard imageUrl={artist6}/>
+      <ArtistCard imageUrl={artist8}/>
+      <ArtistCard imageUrl={artist9}/>
+     </div>
+     <div className="rowOne">
+      <ArtistCard imageUrl={artist10}/>
+      <ArtistCard imageUrl={artist11}/>
+      <ArtistCard imageUrl={artist12}/>
+     </div>
+     <div className="rowOne">
+      <ArtistCard imageUrl={artist13}/>
+      <ArtistCard imageUrl={artist14}/>
+     </div>
+  </div>
 
-          <p>
-          Bridging the Gap Between Streaming & Offline Listening. One Click, Endless Vibes.
-          </p>
+  <div className="getStartedWrapper">
+    
+    <h2> 
+      <Music /> 
+      Your Playlist, Your Music, Anytime.
+    </h2>
 
-          <button>
-            Get Started
-          </button>
-        </div>
+    <p>
+    Bridging the Gap Between Streaming & Offline Listening. One Click, Endless Vibes.
+    </p>
+
+    <button>
+      Get Started
+    </button>
+  </div>
+</div>
       </div>
     </>
   )

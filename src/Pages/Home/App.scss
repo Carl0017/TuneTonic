@@ -26,54 +26,64 @@ body{
   }
 }
 
-.mainWrapper{
- // padding: 0 10rem;
-  height: 100vh;
+.mainCon{
+  //padding: 2rem;
   @include flex (row wrap, 5rem, center);
   align-items: center;
-
-  .artistImageWrapper{
-    background: #3d424b;
-    padding: 2rem;
-    border-radius: 2rem;
-    @include flex(column, .5rem, center);
-
-    .rowOne{
-      @include flex(row, .5rem, center);
-    }
-  }
-
-  .getStartedWrapper{
-    width: min-content;
-    h2{
-      @include flex(row, .5rem, "");
-      align-items: center;
-      @include Poppins(700, normal);
-      text-transform: capitalize;
-      width: max-content;
-      font-size: 2rem;
-    }
-
-    p{
-      @include Poppins(400, normal);
-      width: 85%;
-      font-size: 1.1rem;
-      color: #dadee6
-    }
-
-    button{
-      @include defbutton(#3d424b,  #fff, 1rem 5rem, 1rem);
-      @include Poppins(400, normal);
-      margin-top: 3rem;
-      transition: .3s ease-in-out;
-      font-size: 1.1rem;
-
-      &:hover{
-        @include  customButton(transparent,#fff, 1rem 5rem, 1px solid #494d55);
-      }
-    }
-  }
+  height: 100vh;
+  
+  .mainWrapper{
+    // padding: 0 10rem;
+     //height: 100vh;
+     height: max-content;
+     @include flex (row wrap, 5rem, center);
+     align-items: center;
+   
+     .artistImageWrapper{
+       background: #3d424b;
+       padding: 2rem;
+       border-radius: 2rem;
+       @include flex(column, .5rem, center);
+   
+       .rowOne{
+         @include flex(row, .5rem, center);
+       }
+     }
+   
+     .getStartedWrapper{
+       width: min-content;
+       h2{
+         @include flex(row, .5rem, "");
+         align-items: center;
+         @include Poppins(700, normal);
+         text-transform: capitalize;
+         width: max-content;
+         font-size: 2rem;
+       }
+   
+       p{
+         @include Poppins(400, normal);
+         width: 85%;
+         font-size: 1.1rem;
+         color: #dadee6
+       }
+   
+       button{
+         @include defbutton(#3d424b,  #fff, 1rem 5rem, 1rem);
+         @include Poppins(400, normal);
+         margin-top: 3rem;
+         transition: .3s ease-in-out;
+         font-size: 1.1rem;
+   
+         &:hover{
+           @include  customButton(transparent,#fff, 1rem 5rem, 1px solid #494d55);
+         }
+       }
+     }
+   }
 }
+
+
 
 
 @media screen and (max-width: 768px){
