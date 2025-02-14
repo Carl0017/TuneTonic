@@ -6,13 +6,21 @@ import './index.scss'
 
 //pages
 import App from './Pages/Home/App'
+import SportifySearch from './Pages/SpotifySearch/App'
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+
+  {
+    path: "/Search",
+    element: <SportifySearch />,
   }
+
+  
 
 ]);
 
