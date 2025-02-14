@@ -43,7 +43,7 @@ body {
     align-items: center;
 
     .artistImageWrapper {
-      background: #3d424b;
+      background: $darkShade;
       padding: 2rem;
       border-radius: 2rem;
       @include flex(column, 0.5rem, center);
@@ -72,7 +72,7 @@ body {
       }
 
       button {
-        @include defbutton(#3d424b, #fff, 1rem 5rem, 1rem);
+        @include defbutton($darkShade, #fff, 1rem 5rem, 1rem);
         @include Poppins(400, normal);
         margin-top: 3rem;
         transition: 0.3s ease-in-out;

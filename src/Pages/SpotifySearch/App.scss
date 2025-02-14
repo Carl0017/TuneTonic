@@ -1,3 +1,68 @@
-@use '../../Styles/colors' as *;
-@use '../../Styles/fonts' as *;
-@use '../../Styles/reuseable' as *;
+@use "../../Styles/colors" as *;
+@use "../../Styles/fonts" as *;
+@use "../../Styles/reuseable" as *;
+
+.mainPageWrapper {
+  @include flex(column, "", center);
+  align-items: center;
+  padding: 1rem 20rem;
+
+  .searchWrapper {
+    margin-top: 5rem;
+    @include flex(column, "", center);
+    border-radius: 1rem;
+    background: $darkShade;
+    padding: 7rem 10rem;
+    text-align: center;
+    width: 70%;
+
+    h2 {
+      @include Poppins(700, normal);
+      font-size: 2.5rem;
+    }
+
+    p {
+      @include Poppins(500, normal);
+      width: 60%;
+      color: #eeeaea;
+    }
+
+    #searchInput {
+      margin-top: 2rem;
+      @include flex(row, 1rem, space-between);
+      align-items: center;
+      background: #fff;
+      padding: 0.4rem;
+      border-radius: 0.6rem;
+      width: 60%;
+
+      svg {
+        color: $darkShade;
+        padding-left: 0.7rem;
+      }
+
+      input {
+        padding: 0;
+        height: 2.5rem;
+        width: 90%;
+        border: none;
+        outline: none;
+        @include Poppins(500, normal);
+        //font-size: 1rem;
+      }
+
+      button {
+        @include defbutton($dark, #fff, 0.7rem 1rem, 0.5rem);
+        @include Poppins(500, normal);
+      }
+    }
+
+    #downloadConsent {
+      margin-top: 1rem;
+      p {
+        font-size: 0.8rem;
+        width: 100%;
+      }
+    }
+  }
+}
