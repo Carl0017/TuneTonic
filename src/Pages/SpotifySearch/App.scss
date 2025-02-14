@@ -87,6 +87,36 @@
 }
 
 
+//Playlist Data Card
+
+#musicCard{
+  @include flex(row, 1rem, space-between);
+  align-items: center;
+  background: #fff;
+  padding: 0.4rem;
+  border-radius: 0.6rem;
+  width: 60%;
+
+  svg {
+    color: $brandSecondary;
+    padding-left: 0.7rem;
+  }
+
+  li {
+    @include Poppins(500, normal);
+    //font-size: 1rem;
+    color: $dark;
+    list-style-type: none;
+  }
+
+  button {
+    @include defbutton($brandSecondary, #fff, 0.7rem 1rem, 0.5rem);
+    @include Poppins(500, normal);
+  }
+}
+
+
+
 @media screen and (max-width: 768px){
     .mainPageWrapper{
         padding: 1rem 2rem;

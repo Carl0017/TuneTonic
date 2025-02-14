@@ -1,29 +1,40 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import Navbar from "../../Components/Navbar/App";
 
 import "./App.scss";
-import { Link } from "lucide-react";
+import { Link, Music } from "lucide-react";
 
+//playlist data card
+
+function MusicCard({trackKey, TrackInfo}) {
+  return (
+      <div id="musicCard">
+        <Music />
+        <li>{TrackInfo}</li>
+        <button>Download</button>
+      </div>
+  );
+}
 
 function App() {
-
   const [playlistData, setPlaylistData] = useState(null);
   const [searchResult, setSearchResult] = useState(null);
   const [song, setSong] = useState("");
   const [playlistUrl, setPlaylistUrl] = useState("");
 
-
-    // Fetch playlist data from backend
-    const fetchPlaylist = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/playlist?url=${playlistUrl}`);
-        setPlaylistData(response.data);
-      } catch (error) {
-        console.error("Error fetching playlist data", error);
-      }
-    };
+  // Fetch playlist data from backend
+  const fetchPlaylist = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/playlist?url=${playlistUrl}`
+      );
+      setPlaylistData(response.data);
+    } catch (error) {
+      console.error("Error fetching playlist data", error);
+    }
+  };
 
   return (
     <>
@@ -47,7 +58,7 @@ function App() {
             />
             <button onClick={fetchPlaylist}>Search</button>
           </div>
-          
+
           <button className="mobileButton">Search</button>
 
           <div id="downloadConsent">
@@ -61,17 +72,20 @@ function App() {
 
       {playlistData && (
         <div className="playlistDataWrapper">
-          <h2>Playlist Title: {playlistData.playlistName}</h2>
-       
-            {playlistData.tracks.map((track, index) => (
-              <p key={index}>
-                {track.name} by {track.artist}
-              </p>
-            ))}
-        
+          <h2>Playlist Title : {playlistData.playlistName}</h2>
+
+          {/*  {playlistData.tracks.map((track, index) => (
+            <p key={index}>
+              {track.name} - {track.artist}
+            </p>
+          ))}
+            */}
+
+          {playlistData.tracks.map((track, index) => (
+            <MusicCard key={index} trackKey={index} TrackInfo={`${track.name} - ${track.artist}`} />
+          ))}
         </div>
       )}
-
     </>
   );
 }
