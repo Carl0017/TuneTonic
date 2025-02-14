@@ -78,6 +78,10 @@ body{
 
 @media screen and (max-width: 768px){
 
+  body{
+    overflow: auto;
+  }
+
   .card{
     background-size: cover;
     background-color: $dark;
