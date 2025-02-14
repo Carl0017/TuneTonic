@@ -55,6 +55,7 @@ body {
 
     .getStartedWrapper {
       width: min-content;
+
       h2 {
         @include flex(row, 0.5rem, "");
         align-items: center;
@@ -62,6 +63,11 @@ body {
         text-transform: capitalize;
         width: max-content;
         font-size: 2rem;
+
+        svg{
+          color: $brandSecondary;
+        }
+        
       }
 
       p {
@@ -72,7 +78,7 @@ body {
       }
 
       button {
-        @include defbutton($darkShade, #fff, 1rem 5rem, 1rem);
+      @include defbutton($brandSecondary, #fff, 1rem 5rem, 1rem);
         @include Poppins(400, normal);
         margin-top: 3rem;
         transition: 0.3s ease-in-out;
@@ -88,7 +94,7 @@ body {
             transparent,
             #fff,
             1rem 5rem,
-            1px solid #494d55
+            1px solid $brandSecondary
           );
         }
       }
