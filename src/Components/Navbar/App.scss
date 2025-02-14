@@ -2,7 +2,7 @@
 @use "../../Styles/colors" as *;
 
 header {
-  margin-top: 2rem;
+  padding-top: 2rem;
   position: fixed;
   top: 0;
   @include flex(row, "", center);

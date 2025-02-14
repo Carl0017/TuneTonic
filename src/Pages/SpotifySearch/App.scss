@@ -78,6 +78,15 @@
 }
 
 
+.playlistDataWrapper{
+  @include flex(column, 1rem, center);
+
+  h2{
+    @include Poppins(600, normal);
+  }
+}
+
+
 @media screen and (max-width: 768px){
     .mainPageWrapper{
         padding: 1rem 2rem;
