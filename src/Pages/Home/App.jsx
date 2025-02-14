@@ -18,6 +18,7 @@ import artist11 from "../../Assets/Artist/artist11.webp";
 import artist12 from "../../Assets/Artist/artist12.webp";
 import artist13 from "../../Assets/Artist/artist13.webp";
 import artist14 from "../../Assets/Artist/artist14.webp";
+import { Link } from "react-router-dom";
 
 function ArtistCard({ imageUrl }) {
   return (
@@ -69,7 +70,9 @@ function App() {
               Endless Vibes.
             </p>
 
-            <button>Get Started</button>
+            <button>
+              <Link to={"/search"}>Get Started</Link>
+            </button>
           </div>
         </div>
       </div>

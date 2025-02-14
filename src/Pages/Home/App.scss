@@ -2,6 +2,11 @@
 @use "../../Styles/fonts" as *;
 @use "../../Styles/reuseable" as *;
 
+*{
+  padding:0;
+  margin: 0;
+}
+
 body {
   background: $dark;
   color: $light;
@@ -72,6 +77,11 @@ body {
         margin-top: 3rem;
         transition: 0.3s ease-in-out;
         font-size: 1.1rem;
+
+        a{
+          color: #fff;
+          text-decoration: none;
+        }
 
         &:hover {
           @include customButton(
