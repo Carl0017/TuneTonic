@@ -57,6 +57,14 @@
       }
     }
 
+    .mobileButton{
+        @include defbutton($dark, #fff, 0.7rem 1rem, 0.5rem);
+        @include Poppins(500, normal);
+        width: 100%;
+        margin-top: 1rem;
+        display: none;
+    }
+
     #downloadConsent {
       margin-top: 1rem;
       p {
@@ -65,4 +73,47 @@
       }
     }
   }
+}
+
+
+@media screen and (max-width: 768px){
+    .mainPageWrapper{
+        padding: 1rem 2rem;
+
+        .searchWrapper{
+            padding: 1rem;
+            width: 100%;
+
+            h2{
+                font-size: 1.6rem;
+            }
+
+            p{
+                width: 100%;
+                margin-top: 1rem;
+                
+            }
+
+            #searchInput{
+                @include flex(row, "", start);
+                width: 100%;
+
+                svg{
+                    height: 1rem;
+                }
+
+                input{
+                    width: 80%;
+                }
+
+                button{
+                    display: none;
+                }
+            }
+
+            .mobileButton{
+                display: block;
+            }
+        }
+    }
 }
