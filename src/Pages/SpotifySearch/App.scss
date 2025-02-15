@@ -80,40 +80,57 @@
 
 .playlistDataWrapper{
   @include flex(column, 1rem, center);
+  text-align: center;
 
-  h2{
-    @include Poppins(600, normal);
+  .playlistDataHead{
+    width: 60%;
+    @include flex (row wrap, "", space-between);
+    align-items: center;
+    
+      h2{
+        @include Poppins(600, normal);
+      }
+
+      button{
+        @include defbutton($brandSecondary, #fff, 0.7rem 1rem, 0.5rem);
+        @include Poppins(500, normal);
+      }
+
   }
+
+  //Playlist Data Card
+  #musicCard{
+    @include flex(row, 1rem, space-between);
+    align-items: center;
+    background: #fff;
+    padding: 0.4rem;
+    border-radius: 0.6rem;
+    width: 60%;
+    text-align: left;
+  
+    svg {
+      color: $brandSecondary;
+      padding-left: 0.7rem;
+    }
+  
+    .songInfo {
+      @include Poppins(500, normal);
+      //font-size: 1rem;
+      color: $dark;
+      list-style-type: none;
+    }
+  
+    button {
+      @include defbutton($brandSecondary, #fff, 0.7rem 1rem, 0.5rem);
+      @include Poppins(500, normal);
+    }
+  }
+  
 }
 
 
-//Playlist Data Card
 
-#musicCard{
-  @include flex(row, 1rem, space-between);
-  align-items: center;
-  background: #fff;
-  padding: 0.4rem;
-  border-radius: 0.6rem;
-  width: 60%;
 
-  svg {
-    color: $brandSecondary;
-    padding-left: 0.7rem;
-  }
-
-  li {
-    @include Poppins(500, normal);
-    //font-size: 1rem;
-    color: $dark;
-    list-style-type: none;
-  }
-
-  button {
-    @include defbutton($brandSecondary, #fff, 0.7rem 1rem, 0.5rem);
-    @include Poppins(500, normal);
-  }
-}
 
 
 
@@ -156,5 +173,27 @@
                 display: block;
             }
         }
+    }
+
+    .playlistDataWrapper{
+      padding: 1 1rem;
+
+      .playlistDataHead{
+        width: 90%;
+        justify-content: center;
+
+        h2{
+          font-size: 1rem;
+        }
+
+        button{
+          padding: 0.5rem .6rem;
+        }
+      }
+    
+
+      #musicCard{
+        width: 90%;
+      }
     }
 }

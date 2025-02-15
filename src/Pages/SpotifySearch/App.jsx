@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import axios from "axios";
 
 import Navbar from "../../Components/Navbar/App";
@@ -6,13 +6,26 @@ import Navbar from "../../Components/Navbar/App";
 import "./App.scss";
 import { Link, Music } from "lucide-react";
 
+
+
+const truncateTitles = () => {
+  document.querySelectorAll(".songInfo").forEach((title) => {
+    let screenWidth = window.innerWidth;
+    let maxLength = screenWidth > 768 ? 80 : screenWidth > 480 ? 60 : 40;
+
+    if (title.innerText.length > maxLength) {
+      title.innerText = title.innerText.substring(0, maxLength) + "...";
+    }
+  });
+};
+
 //playlist data card
 
 function MusicCard({trackKey, TrackInfo}) {
   return (
       <div id="musicCard">
         <Music />
-        <li>{TrackInfo}</li>
+        <li className="songInfo">{TrackInfo}</li>
         <button>Download</button>
       </div>
   );
@@ -35,6 +48,13 @@ function App() {
       console.error("Error fetching playlist data", error);
     }
   };
+
+
+  useEffect(() => {
+    truncateTitles();
+    window.addEventListener("resize", truncateTitles);
+    return () => window.removeEventListener("resize", truncateTitles);
+  }, []);
 
   return (
     <>
@@ -59,7 +79,7 @@ function App() {
             <button onClick={fetchPlaylist}>Search</button>
           </div>
 
-          <button className="mobileButton">Search</button>
+          <button className="mobileButton" onClick={fetchPlaylist}>Search</button>
 
           <div id="downloadConsent">
             <p>
@@ -72,7 +92,14 @@ function App() {
 
       {playlistData && (
         <div className="playlistDataWrapper">
+        
+        <div className="playlistDataHead">
           <h2>Playlist Title : {playlistData.playlistName}</h2>
+
+          <button>
+            Bulk Download
+          </button>
+        </div>
 
           {/*  {playlistData.tracks.map((track, index) => (
             <p key={index}>
