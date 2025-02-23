@@ -1,12 +1,8 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import Navbar from "../../Components/Navbar/App";
-
 import "./App.scss";
-import { Link, Music } from "lucide-react";
-
-
+import { Link, Music, Download } from "lucide-react";
 
 const truncateTitles = () => {
   document.querySelectorAll(".songInfo").forEach((title) => {
@@ -19,36 +15,57 @@ const truncateTitles = () => {
   });
 };
 
-//playlist data card
-
-function MusicCard({trackKey, TrackInfo}) {
+function MusicCard({ track, onDownload }) {
   return (
-      <div id="musicCard">
-        <Music />
-        <li className="songInfo">{TrackInfo}</li>
-        <button>Download</button>
-      </div>
+    <div id="musicCard">
+      <Music />
+      <li className="songInfo">{track.name} - {track.artist}</li>
+      <button onClick={() => onDownload(track)}>Download</button>
+    </div>
   );
 }
-
+  
 function App() {
   const [playlistData, setPlaylistData] = useState(null);
-  const [searchResult, setSearchResult] = useState(null);
-  const [song, setSong] = useState("");
   const [playlistUrl, setPlaylistUrl] = useState("");
+  const [downloading, setDownloading] = useState(false);
 
-  // Fetch playlist data from backend
   const fetchPlaylist = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/playlist?url=${playlistUrl}`
-      );
+      const response = await axios.get(`http://localhost:5000/playlist?url=${playlistUrl}`);
       setPlaylistData(response.data);
     } catch (error) {
       console.error("Error fetching playlist data", error);
     }
   };
 
+  const downloadTrack = async (track) => {
+    try {
+      console.log("Sending request with:", track);
+
+      const response = await axios.post("http://localhost:5000/download", {
+        videoUrl: `${track.name} - ${track.artist}`,
+      });
+
+      console.log("Response:", response.data);
+    } catch (error) {
+      console.error("Download failed", error.response?.data || error.message);
+    }
+  };
+
+  const bulkDownload = async () => {
+    try {
+      setDownloading(true);
+      for (const track of playlistData.tracks) {
+        await downloadTrack(track);
+      }
+      alert("Bulk download started!");
+    } catch (error) {
+      console.error("Bulk download failed", error);
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   useEffect(() => {
     truncateTitles();
@@ -59,57 +76,29 @@ function App() {
   return (
     <>
       <Navbar />
-
       <div className="mainPageWrapper">
         <div className="searchWrapper">
           <h2>Spotify Playlist Downloader</h2>
-          <p>
-            Download any public Spotify playlist, convert tracks to MP3, and
-            take your music offline effortlessly!
-          </p>
-
+          <p>Download any public Spotify playlist as MP3!</p>
           <div id="searchInput">
             <Link />
-            <input
-              type="text"
-              placeholder="Paste a Spotify playlist URL here"
-              value={playlistUrl}
-              onChange={(e) => setPlaylistUrl(e.target.value)}
-            />
+            <input type="text" placeholder="Paste Spotify playlist URL" value={playlistUrl} onChange={(e) => setPlaylistUrl(e.target.value)} />
             <button onClick={fetchPlaylist}>Search</button>
           </div>
-
           <button className="mobileButton" onClick={fetchPlaylist}>Search</button>
-
-          <div id="downloadConsent">
-            <p>
-              By downloading this Spotify Playlist, you agree to the{" "}
-              <span style={{ color: "" }}>Usage Guidelines.</span>
-            </p>
-          </div>
         </div>
       </div>
 
       {playlistData && (
         <div className="playlistDataWrapper">
-        
-        <div className="playlistDataHead">
-          <h2>Playlist Title : {playlistData.playlistName}</h2>
-
-          <button>
-            Bulk Download
-          </button>
-        </div>
-
-          {/*  {playlistData.tracks.map((track, index) => (
-            <p key={index}>
-              {track.name} - {track.artist}
-            </p>
-          ))}
-            */}
-
+          <div className="playlistDataHead">
+            <h2>Playlist: {playlistData.playlistName}</h2>
+            <button onClick={bulkDownload} disabled={downloading}> 
+              <Download /> Bulk Download 
+            </button>
+          </div>
           {playlistData.tracks.map((track, index) => (
-            <MusicCard key={index} trackKey={index} TrackInfo={`${track.name} - ${track.artist}`} />
+            <MusicCard key={index} track={track} onDownload={downloadTrack} />
           ))}
         </div>
       )}

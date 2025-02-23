@@ -3,6 +3,10 @@ const express = require("express");
 const axios = require("axios");
 const ytSearch = require("yt-search");
 const cors = require("cors");
+const { exec } = require("child_process");
+const ytdl = require("ytdl-core");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -13,7 +17,6 @@ const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
 let spotifyAccessToken = "";
 
-// 🔹 Get Spotify Access Token
 async function getSpotifyToken() {
   const response = await axios.post(
     "https://accounts.spotify.com/api/token",
@@ -29,8 +32,6 @@ async function getSpotifyToken() {
   );
   spotifyAccessToken = response.data.access_token;
 }
-
-// 🔹 Fetch Playlist Details
 
 app.get("/playlist", async (req, res) => {
   try {
@@ -55,7 +56,6 @@ app.get("/playlist", async (req, res) => {
   }
 });
 
-// 🔹 Search Track on YouTube
 app.get("/search", async (req, res) => {
   try {
     const { song } = req.query;
@@ -66,7 +66,33 @@ app.get("/search", async (req, res) => {
   }
 });
 
-// Start server
+app.post("/download", async (req, res) => {
+  try {
+      const { videoUrl } = req.body; // videoUrl is actually the song title
+      console.log("Searching for:", videoUrl);
+
+      // Step 1: Search and download directly
+      const outputPath = path.join(__dirname, "downloads"); // Save files in 'downloads' folder
+      const command = `yt-dlp -x --audio-format mp3 -o "${outputPath}/%(title)s.%(ext)s" "ytsearch1:${videoUrl}"`;
+
+      exec(command, (error, stdout, stderr) => {
+          if (error) {
+              console.error("Download error:", stderr);
+              return res.status(500).json({ error: "Failed to download" });
+          }
+
+          console.log("Download successful:", stdout);
+          res.json({ message: "Download started", output: stdout });
+      });
+
+  } catch (err) {
+      console.error("Server error:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
 app.listen(5000, () => {
   console.log("Server running on http://localhost:5000");
 });
